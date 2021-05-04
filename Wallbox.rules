@@ -1,0 +1,132 @@
+//Wallbox UI Change of MaximumCurrent
+rule "WB MaximumCurrentChange WBVorne UI"
+when
+        Item WBVorne_MaximumCurrent_UI received command
+then    
+        createTimer(now.plusSeconds(3)) [|
+            sendCommand(WBVorne_MaximumCurrent, WBVorne_MaximumCurrent_UI.state as Number)
+            sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent_UI.state as Number)        
+        ]
+
+end
+rule "WB MaximumCurrentChange WBGarage UI"
+when
+        Item WBGarage_MaximumCurrent_UI received command
+then
+        createTimer(now.plusSeconds(3)) [|
+            sendCommand(WBGarage_MaximumCurrent, WBGarage_MaximumCurrent_UI.state as Number)
+            sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent_UI.state as Number)        
+        ]
+end
+
+
+
+
+//Wallbox online / offline Management
+rule "WBGarage goes offline"
+when
+        Thing "modbus:data:modbusGarage:holdingRegisters3:holding262" changed to OFFLINE
+then
+        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent.state as Number)
+end
+rule "WBVorne goes offline"
+when
+        Thing "modbus:data:modbusVorne:holdingRegisters3:holding262" changed to OFFLINE
+then
+        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent.state as Number)
+end
+
+rule "WBGarage goes online"
+when
+        Thing "modbus:data:modbusGarage:holdingRegisters3:holding262" changed to ONLINE
+then
+        val current=WBGarage_SavedCurrent_Hold.state as Number
+    	createTimer(now.plusSeconds(15)) [|
+                sendCommand(WBGarage_MaximumCurrent, current)
+                sendCommand(WBGarage_FailsafeCurrent, 80)
+    			]
+
+end
+rule "WBVorne goes online"
+when
+        Thing "modbus:data:modbusVorne:holdingRegisters3:holding262" changed to ONLINE
+then
+        val current=WBVorne_SavedCurrent_Hold.state as Number
+    	createTimer(now.plusSeconds(15)) [|
+                sendCommand(WBVorne_MaximumCurrent, current)
+               // sendCommand(WBGarage_FailsafeCurrent, 80)
+    			]
+end
+
+
+//Geofencing Rules Tesla
+rule "WBGarage Leave"
+when
+        Item TeslaModel3_Geofence changed from "ZuhauseGarage"
+then
+        postUpdate(WBGarage_MaximumCurrent_UI,0)
+        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent.state as Number)
+        sendCommand(WBGarage_MaximumCurrent,0)
+
+end
+
+rule "WBGarage Arrive"
+when
+        Item TeslaModel3_Geofence changed to "ZuhauseGarage"
+then
+        sendCommand(WBGarage_MaximumCurrent_UI, WBGarage_SavedCurrent_Hold.state as Number)
+end
+
+rule "WBVorne Leave"
+when
+        Item TeslaModel3_Geofence changed from "ZuhauseVorne"
+then
+        postUpdate(WBVorne_MaximumCurrent_UI,0)
+        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent.state as Number)
+        sendCommand(WBVorne_MaximumCurrent,0)
+
+end
+
+rule "WBVorne Arrive"
+when
+        Item TeslaModel3_Geofence changed to "ZuhauseVorne"
+then
+        logWarn("Wallbox", "WBVorne Arrive")
+        sendCommand(WBVorne_MaximumCurrent_UI, WBVorne_SavedCurrent_Hold.state as Number)
+end
+
+
+//Loadmanagement
+//Wenn sich der Ladestatus einer Wallbox oder wenn sich der eingestellte Maximale Ladestrom einer Wallbox ändere, stelle sicher, dass zusammen nur 16A gezogen werden.
+//Dazu setze den Ladestrom auf maximal 10A, da die zweite Wallbox mindestens 6A laden können muss. Erlaubt ist: 10/6 und 8/8 und 6/10 
+
+rule "LoadManagement Wallbox"
+when
+        Item WBVorne_MaximumCurrent changed or Item WBGarage_MaximumCurrent changed or Item WBVorne_ChargingState changed to 7 or Item WBGarage_ChargingState changed to 7
+then
+    var combined_current = WBVorne_MaximumCurrent.state as Number + WBGarage_MaximumCurrent.state as Number
+    if ((WBVorne_ChargingState.state as Number == 7) && (WBGarage_ChargingState.state as Number == 7) && (combined_current > 160)) {
+        WBVorne_MaximumCurrent_UI.sendCommand(80)
+        WBGarage_MaximumCurrent_UI.sendCommand(80)
+    }
+
+end
+
+//Energiezähler
+rule "Energycounter WBVorne"
+when
+    Item WBVorne_EnergySinceInstallationLow changed
+then
+    var energy_since_install = WBVorne_EnergySinceInstallationHigh.state as Number * 65535 + WBVorne_EnergySinceInstallationLow.state as Number
+    WBVorne_EnergySinceInstallation.postUpdate(energy_since_install)
+end
+
+//Energiezähler
+rule "Energycounter WBGarage"
+when
+    Item WBGarage_EnergySinceInstallationLow changed
+then
+    var energy_since_install = WBGarage_EnergySinceInstallationHigh.state as Number * 65535 + WBGarage_EnergySinceInstallationLow.state as Number
+    WBGarage_EnergySinceInstallation.postUpdate(energy_since_install)
+end
+

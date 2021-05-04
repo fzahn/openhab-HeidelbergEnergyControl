@@ -1,0 +1,40 @@
+sitemap Wallbox {
+Frame label="Mobilität" {
+    Group label="Wallbox Vorne" icon="poweroutlet_eu" item=Blank_Item {
+        Text item=WBVorne_ChargingState
+        Selection item=WBVorne_MaximumCurrent_UI mappings=[0='gesperrt',60='6A',80='8A',100='10A',120='12A',140='14A',160='16A']
+        Text item=WBVorne_L1Current
+        Text item=WBVorne_L1Voltage
+        Text item=WBVorne_L2Current
+        Text item=WBVorne_L2Voltage
+        Text item=WBVorne_L3Current
+        Text item=WBVorne_L3Voltage
+        Text item=WBVorne_EnergySinceInstallation
+        Text item=WBVorne_PCBTemp
+        Text item=WBVorne_Power
+        Text item=WBVorne_WatchDogTimeout
+        Text item=WBVorne_StandbyControl
+        Text item=WBVorne_FailsafeCurrent
+        
+    }
+    Group label="Wallbox Garage" icon="poweroutlet_eu" item=Blank_Item {
+        Text item=WBGarage_ChargingState
+        Selection item=WBGarage_MaximumCurrent_UI mappings=[0='gesperrt',60='6A',80='8A',100='10A',120='12A',140='14A',160='16A']
+        Text item=WBGarage_L1Current
+        Text item=WBGarage_L1Voltage
+        Text item=WBGarage_L2Current
+        Text item=WBGarage_L2Voltage
+        Text item=WBGarage_L3Current
+        Text item=WBGarage_L3Voltage
+        Text item=WBGarage_EnergySinceInstallation
+        Text item=WBGarage_PCBTemp
+        Text item=WBGarage_Power
+        Text item=WBGarage_WatchDogTimeout
+        Text item=WBGarage_StandbyControl
+        Text item=WBGarage_FailsafeCurrent
+        
+    }
+}
+
+
+}

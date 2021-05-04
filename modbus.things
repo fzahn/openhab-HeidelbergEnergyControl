@@ -1,0 +1,72 @@
+//Wallbox mit Modbus ID2 Vorne
+Bridge modbus:tcp:modbusVorne [ host="192.168.23.12", port=502, id=2 ] {
+
+ Bridge poller inputRegisters [ start=4, length=15, refresh=4000, type="input" ] {
+        Thing data input4 [ readStart="4", readValueType="uint16" ]
+        Thing data input5 [ readStart="5", readValueType="uint16" ]
+        Thing data input6 [ readStart="6", readValueType="uint16" ]
+        Thing data input7 [ readStart="7", readValueType="uint16" ]
+        Thing data input8 [ readStart="8", readValueType="uint16" ]
+        Thing data input9 [ readStart="9", readValueType="int16" ]
+        Thing data input10 [ readStart="10", readValueType="uint16" ]
+        Thing data input11 [ readStart="11", readValueType="uint16" ]
+        Thing data input12 [ readStart="12", readValueType="uint16" ]
+        Thing data input13 [ readStart="13", readValueType="uint16" ]
+        Thing data input14 [ readStart="14", readValueType="uint16" ]
+        Thing data input15 [ readStart="15", readValueType="uint16" ]
+        Thing data input16 [ readStart="16", readValueType="uint16" ]
+        Thing data input17 [ readStart="17", readValueType="uint16" ]
+        Thing data input18 [ readStart="18", readValueType="uint16" ]
+ }
+
+ 
+ Bridge poller holdingRegisters1 [ start=257, length=1, refresh=4000, type="holding" ] {
+        Thing data holding257 [ readStart="257", readValueType="uint16",writeStart="257", writeValueType="uint16", writeType="holding"  ]
+ }
+ Thing data holding258write [ writeStart="258", writeValueType="uint16", writeType="holding" ]
+ 
+ Bridge poller holdingRegisters2 [ start=259, length=1, refresh=4000, type="holding" ] {
+        Thing data holding259 [ readStart="259", readValueType="uint16",writeStart="259", writeValueType="uint16", writeType="holding"  ]
+ }
+     
+        
+ Bridge poller holdingRegisters3 [ start=261, length=2, refresh=4000, type="holding" ] {       
+        Thing data holding261 [ readStart="261", readValueType="uint16",writeStart="261", writeValueType="uint16", writeType="holding"  ]
+        Thing data holding262 [ readStart="262", readValueType="uint16",writeStart="262", writeValueType="uint16", writeType="holding"  ]
+        
+ }
+}
+//Wallbox mit Modbus ID1 Garage
+Bridge modbus:tcp:modbusGarage [ host="192.168.23.12", port=502, id=1 ] {
+
+ Bridge poller inputRegisters [ start=4, length=15, refresh=4000, type="input" ] {
+        Thing data input4 [ readStart="4", readValueType="uint16" ]
+        Thing data input5 [ readStart="5", readValueType="uint16" ]
+        Thing data input6 [ readStart="6", readValueType="uint16" ]
+        Thing data input7 [ readStart="7", readValueType="uint16" ]
+        Thing data input8 [ readStart="8", readValueType="uint16" ]
+        Thing data input9 [ readStart="9", readValueType="int16" ]
+        Thing data input10 [ readStart="10", readValueType="uint16" ]
+        Thing data input11 [ readStart="11", readValueType="uint16" ]
+        Thing data input12 [ readStart="12", readValueType="uint16" ]
+        Thing data input13 [ readStart="13", readValueType="uint16" ]
+        Thing data input14 [ readStart="14", readValueType="uint16" ]
+        Thing data input15 [ readStart="15", readValueType="uint16" ]
+        Thing data input16 [ readStart="16", readValueType="uint16" ]
+        Thing data input17 [ readStart="17", readValueType="uint16" ]
+        Thing data input18 [ readStart="18", readValueType="uint16" ]
+ }
+
+ 
+ Bridge poller holdingRegisters1 [ start=257, length=1, refresh=4000, type="holding" ] {
+        Thing data holding257 [ readStart="257", readValueType="uint16",writeStart="257", writeValueType="uint16", writeType="holding"  ]
+ }
+ Thing data holding258write [ writeStart="258", writeValueType="uint16", writeType="holding" ]
+ 
+     
+        
+ Bridge poller holdingRegisters3 [ start=261, length=2, refresh=4000, type="holding" ] {       
+        Thing data holding261 [ readStart="261", readValueType="uint16",writeStart="261", writeValueType="uint16", writeType="holding"  ]
+        Thing data holding262 [ readStart="262", readValueType="uint16",writeStart="262", writeValueType="uint16", writeType="holding"  ]
+ }
+}
