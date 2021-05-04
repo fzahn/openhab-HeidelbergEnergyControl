@@ -1,57 +1,57 @@
 //Wallbox Garage
 Number WBGarage_RegisterLayout "Register Layout Version" { channel="modbus:data:modbusGarage:inputRegisters:input4:number" }
 Number WBGarage_ChargingState "Lade Status: [MAP(wallbox.map):%s]" { channel="modbus:data:modbusGarage:inputRegisters:input5:number" }
-Number WBGarage_L1Current "Strom L1" { channel="modbus:data:modbusGarage:inputRegisters:input6:number" }
-Number WBGarage_L2Current "Strom L2" { channel="modbus:data:modbusGarage:inputRegisters:input7:number" }
-Number WBGarage_L3Current "Strom L3" { channel="modbus:data:modbusGarage:inputRegisters:input8:number" }
-Number WBGarage_PCBTemp "Temperatur PCB" { channel="modbus:data:modbusGarage:inputRegisters:input9:number" }
-Number WBGarage_L1Voltage "Spannung L1" { channel="modbus:data:modbusGarage:inputRegisters:input10:number" }
-Number WBGarage_L2Voltage "Spannung L2" { channel="modbus:data:modbusGarage:inputRegisters:input11:number" }
-Number WBGarage_L3Voltage "Spannung L3" { channel="modbus:data:modbusGarage:inputRegisters:input12:number" }
+Number WBGarage_L1Current "Strom L1 [%d A]" { channel="modbus:data:modbusGarage:inputRegisters:input6:number" }
+Number WBGarage_L2Current "Strom L2 [%d A]" { channel="modbus:data:modbusGarage:inputRegisters:input7:number" }
+Number WBGarage_L3Current "Strom L3 [%d A]" { channel="modbus:data:modbusGarage:inputRegisters:input8:number" }
+Number WBGarage_PCBTemp "Temperatur PCB [JS(by10.js):%.1f C]" { channel="modbus:data:modbusGarage:inputRegisters:input9:number" }
+Number WBGarage_L1Voltage "Spannung L1 [%d V]" { channel="modbus:data:modbusGarage:inputRegisters:input10:number" }
+Number WBGarage_L2Voltage "Spannung L2 [%d V]" { channel="modbus:data:modbusGarage:inputRegisters:input11:number" }
+Number WBGarage_L3Voltage "Spannung L3 [%d V]" { channel="modbus:data:modbusGarage:inputRegisters:input12:number" }
 Number WBGarage_ExternalLockState "Extern verriegelt" { channel="modbus:data:modbusGarage:inputRegisters:input13:number" }
-Number WBGarage_Power "Leistung" { channel="modbus:data:modbusGarage:inputRegisters:input14:number" }
+Number WBGarage_Power "Leistung [%d W]" { channel="modbus:data:modbusGarage:inputRegisters:input14:number" }
 Number WBGarage_EnergySincePowerOnHigh "Energie seit PowerOn HighByte" { channel="modbus:data:modbusGarage:inputRegisters:input15:number" }
 Number WBGarage_EnergySincePowerOnLow "Energie seit PowerOn LowByte" { channel="modbus:data:modbusGarage:inputRegisters:input16:number" }
 Number WBGarage_EnergySinceInstallationHigh "Energie seit Installation HighByte" { channel="modbus:data:modbusGarage:inputRegisters:input17:number" }
 Number WBGarage_EnergySinceInstallationLow "Energie seit Installation LowByte" { channel="modbus:data:modbusGarage:inputRegisters:input18:number" }
-Number WBGarage_WatchDogTimeout "WatchDog Timeout in ms" { channel="modbus:data:modbusGarage:holdingRegisters1:holding257:number" }
+Number WBGarage_WatchDogTimeout "WatchDog Timeout [%d ms]" { channel="modbus:data:modbusGarage:holdingRegisters1:holding257:number" }
 Number WBGarage_StandbyControl "Standby-Funktion" { channel="modbus:data:modbusGarage:holding258write:number" }
 Number WBGarage_RemoteLock "Remote Lock" { channel="modbus:data:modbusGarage:holdingRegisters2:holding259:number" }
 Number WBGarage_MaximumCurrent "Maximale Ladeleistung" { channel="modbus:data:modbusGarage:holdingRegisters3:holding261:number" }
-Number WBGarage_FailsafeCurrent "Failsafe Strom" { channel="modbus:data:modbusGarage:holdingRegisters3:holding262:number" }
+Number WBGarage_FailsafeCurrent "Failsafe Strom [JS(by10.js):%d A]" { channel="modbus:data:modbusGarage:holdingRegisters3:holding262:number" }
 
 //Wallbox Garage Items for Rules
 Number WBGarage_MaximumCurrent_UI "Maximale Ladeleistung"
 Number WBGarage_SavedCurrent_Hold "Maximale Ladeleistung"
 Number WBGarage_EnergySincePowerOn "Energie seit PowerOn"
-Number WBGarage_EnergySinceInstallation "Energie seit Installation: [%s Wh]"
+Number WBGarage_EnergySinceInstallation "Energie seit Installation [JS(by1000.js):%.2f]"
 
 
 
 //WallboxVorne
 Number WBVorne_RegisterLayout "Register Layout Version" { channel="modbus:data:modbusVorne:inputRegisters:input4:number" }
 Number WBVorne_ChargingState "Lade Status: [MAP(wallbox.map):%s]" { channel="modbus:data:modbusVorne:inputRegisters:input5:number" }
-Number WBVorne_L1Current "Strom L1" { channel="modbus:data:modbusVorne:inputRegisters:input6:number" }
-Number WBVorne_L2Current "Strom L2" { channel="modbus:data:modbusVorne:inputRegisters:input7:number" }
-Number WBVorne_L3Current "Strom L3" { channel="modbus:data:modbusVorne:inputRegisters:input8:number" }
-Number WBVorne_PCBTemp "Temperatur PCB" { channel="modbus:data:modbusVorne:inputRegisters:input9:number" }
-Number WBVorne_L1Voltage "Spannung L1" { channel="modbus:data:modbusVorne:inputRegisters:input10:number" }
-Number WBVorne_L2Voltage "Spannung L2" { channel="modbus:data:modbusVorne:inputRegisters:input11:number" }
-Number WBVorne_L3Voltage "Spannung L3" { channel="modbus:data:modbusVorne:inputRegisters:input12:number" }
+Number WBVorne_L1Current "Strom L1 [%d A]" { channel="modbus:data:modbusVorne:inputRegisters:input6:number" }
+Number WBVorne_L2Current "Strom L2 [%d A]" { channel="modbus:data:modbusVorne:inputRegisters:input7:number" }
+Number WBVorne_L3Current "Strom L3 [%d A]" { channel="modbus:data:modbusVorne:inputRegisters:input8:number" }
+Number WBVorne_PCBTemp "Temperatur PCB [JS(by10.js):%.1f C]" { channel="modbus:data:modbusVorne:inputRegisters:input9:number" }
+Number WBVorne_L1Voltage "Spannung L1 [%d V]" { channel="modbus:data:modbusVorne:inputRegisters:input10:number" }
+Number WBVorne_L2Voltage "Spannung L2 [%d V]" { channel="modbus:data:modbusVorne:inputRegisters:input11:number" }
+Number WBVorne_L3Voltage "Spannung L3 [%d V]" { channel="modbus:data:modbusVorne:inputRegisters:input12:number" }
 Number WBVorne_ExternalLockState "Extern verriegelt" { channel="modbus:data:modbusVorne:inputRegisters:input13:number" }
-Number WBVorne_Power "Leistung" { channel="modbus:data:modbusVorne:inputRegisters:input14:number" }
+Number WBVorne_Power "Leistung [%d W]" { channel="modbus:data:modbusVorne:inputRegisters:input14:number" }
 Number WBVorne_EnergySincePowerOnHigh "Energie seit PowerOn HighByte" { channel="modbus:data:modbusVorne:inputRegisters:input15:number" }
 Number WBVorne_EnergySincePowerOnLow "Energie seit PowerOn LowByte" { channel="modbus:data:modbusVorne:inputRegisters:input16:number" }
 Number WBVorne_EnergySinceInstallationHigh "Energie seit Installation HighByte" { channel="modbus:data:modbusVorne:inputRegisters:input17:number" }
 Number WBVorne_EnergySinceInstallationLow "Energie seit Installation LowByte" { channel="modbus:data:modbusVorne:inputRegisters:input18:number" }
-Number WBVorne_WatchDogTimeout "WatchDog Timeout in ms" { channel="modbus:data:modbusVorne:holdingRegisters1:holding257:number" }
+Number WBVorne_WatchDogTimeout "WatchDog Timeout [%d ms]" { channel="modbus:data:modbusVorne:holdingRegisters1:holding257:number" }
 Number WBVorne_StandbyControl "Standby-Funktion" { channel="modbus:data:modbusVorne:holding258write:number" }
 Number WBVorne_RemoteLock "Remote Lock" { channel="modbus:data:modbusVorne:holdingRegisters2:holding259:number" }
 Number WBVorne_MaximumCurrent "Maximale Ladeleistung" { channel="modbus:data:modbusVorne:holdingRegisters3:holding261:number" }
-Number WBVorne_FailsafeCurrent "Failsafe Strom" { channel="modbus:data:modbusVorne:holdingRegisters3:holding262:number" }
+Number WBVorne_FailsafeCurrent "Failsafe Strom [JS(by10.js):%d A]" { channel="modbus:data:modbusVorne:holdingRegisters3:holding262:number" }
 
 //Wallbox Vorne Items for Rules
 Number WBVorne_MaximumCurrent_UI  "Maximale Ladeleistung"
 Number WBVorne_SavedCurrent_Hold "Maximale Ladeleistung"
 Number WBVorne_EnergySincePowerOn "Energie seit PowerOn"
-Number WBVorne_EnergySinceInstallation "Energie seit Installation: [%d Wh]"
+Number WBVorne_EnergySinceInstallation "Energie seit Installation [%d Wh]"
