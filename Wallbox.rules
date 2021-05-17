@@ -64,10 +64,9 @@ rule "WBGarage Leave"
 when
         Item TeslaModel3_Geofence changed from "ZuhauseGarage"
 then
-        postUpdate(WBGarage_MaximumCurrent_UI,0)
-        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent.state as Number)
+        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent_UI.state as Number)
         sendCommand(WBGarage_MaximumCurrent,0)
-
+        postUpdate(WBGarage_MaximumCurrent_UI,0)
 end
 
 rule "WBGarage Arrive"
@@ -75,16 +74,16 @@ when
         Item TeslaModel3_Geofence changed to "ZuhauseGarage"
 then
         sendCommand(WBGarage_MaximumCurrent_UI, WBGarage_SavedCurrent_Hold.state as Number)
+        sendCommand(WBGarage_MaximumCurrent, WBGarage_SavedCurrent_UI.state as Number)
 end
 
 rule "WBVorne Leave"
 when
         Item TeslaModel3_Geofence changed from "ZuhauseVorne"
 then
-        postUpdate(WBVorne_MaximumCurrent_UI,0)
-        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent.state as Number)
+        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent_UI.state as Number)
         sendCommand(WBVorne_MaximumCurrent,0)
-
+        postUpdate(WBVorne_MaximumCurrent_UI,0)
 end
 
 rule "WBVorne Arrive"
@@ -93,6 +92,7 @@ when
 then
         logWarn("Wallbox", "WBVorne Arrive")
         sendCommand(WBVorne_MaximumCurrent_UI, WBVorne_SavedCurrent_Hold.state as Number)
+        sendCommand(WBVorne_MaximumCurrent, WBVorne_SavedCurrent_UI.state as Number)
 end
 
 
