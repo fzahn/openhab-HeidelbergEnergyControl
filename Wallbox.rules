@@ -27,13 +27,13 @@ rule "WBGarage goes offline"
 when
         Thing "modbus:data:modbusGarage:holdingRegisters3:holding262" changed to OFFLINE
 then
-        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent.state as Number)
+        sendCommand(WBGarage_SavedCurrent_Hold, WBGarage_MaximumCurrent_UI.state as Number)
 end
 rule "WBVorne goes offline"
 when
         Thing "modbus:data:modbusVorne:holdingRegisters3:holding262" changed to OFFLINE
 then
-        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent.state as Number)
+        sendCommand(WBVorne_SavedCurrent_Hold, WBVorne_MaximumCurrent_UI.state as Number)
 end
 
 rule "WBGarage goes online"
@@ -74,7 +74,7 @@ when
         Item TeslaModel3_Geofence changed to "ZuhauseGarage"
 then
         sendCommand(WBGarage_MaximumCurrent_UI, WBGarage_SavedCurrent_Hold.state as Number)
-        sendCommand(WBGarage_MaximumCurrent, WBGarage_SavedCurrent_UI.state as Number)
+        sendCommand(WBGarage_MaximumCurrent, WBGarage_MaximumCurrent_UI.state as Number)
 end
 
 rule "WBVorne Leave"
@@ -92,7 +92,7 @@ when
 then
         logWarn("Wallbox", "WBVorne Arrive")
         sendCommand(WBVorne_MaximumCurrent_UI, WBVorne_SavedCurrent_Hold.state as Number)
-        sendCommand(WBVorne_MaximumCurrent, WBVorne_SavedCurrent_UI.state as Number)
+        sendCommand(WBVorne_MaximumCurrent, WBVorne_MaximumCurrent_UI.state as Number)
 end
 
 
